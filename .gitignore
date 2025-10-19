@@ -1,0 +1,30 @@
+# ===== Node / Next.js =====
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+.pnpm-store/
+.env
+.env.*.local
+.env.local
+
+# ===== Go (backend) =====
+bin/
+build/
+dist/
+*.exe
+*.out
+*.test
+
+# ===== Umum / Editor =====
+.DS_Store
+*.swp
+
+# ===== Arsip besar tak perlu ke repo =====
+*.tar
+*.tar.gz
+*.zip
+*.7z
