@@ -48,8 +48,9 @@ export default function BookingsPage() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
   const { count } = useCart();
+  const [, setCartOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  // const [cartOpen, setCartOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -101,30 +102,17 @@ export default function BookingsPage() {
   return (
     <>
     {/* NAVBAR */}
-    <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-neutral-200">
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-semibold text-lg rounded-full shadow-xl px-4 py-2 bg-[#920E1C] text-white hover:opacity-90"
-        >
-          BadmintonGo
-        </Link>
-
-        <nav className="hidden md:flex gap-6 text-sm">
-          <Link href="/#gallery" className="hover:opacity-70">Galeri</Link>
-          <Link href="/#about" className="hover:opacity-70">Tentang</Link>
-          <Link href="/#booking" className="hover:opacity-70">Pilih Lapangan</Link>
-          <Link href="/bookings" className="hover:opacity-70 font-semibold text-red-700">Jadwal Saya</Link>
-        </nav>
-
-        <Link
-          href="/checkout"
-          className="relative rounded-full px-4 py-2 hover:bg-neutral-100 text-sm text-red-600"
-        >
-          Keranjang ({mounted ? count() : 0})
-        </Link>
-      </div>
-    </header>
+    <header className="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-neutral-200">
+        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="font-semibold text-lg rounded-full shadow-md px-4 py-2 bg-[#920E1C] text-white hover:opacity-90"
+          >
+            BadmintonGo
+          </Link>
+        </div>
+      </header>
 
       <main className="mx-auto max-w-5xl px-4 py-8 bg-neutral-51">
         {/* CARD WRAPPER */}
@@ -229,7 +217,7 @@ export default function BookingsPage() {
 
                       <div className="px-5 py-4 space-y-3">
                         {b.items.map(it => (
-                          <div key={it.id} className="flex items-center justify-between rounded-xl border text-sm dark:border-white/10">
+                          <div key={it.id} className="flex items-center justify-between px-4 py-3 text-sm">
                             <div className="min-w-0">
                               <div className="font-medium">Court {it.court_id}</div>
                               <div className="text-neutral-500">

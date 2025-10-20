@@ -101,6 +101,7 @@ export default function Page() {
   const { items: cart, add, remove, total, count } = useCart();
   const [cartOpen, setCartOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const isSport = (x: unknown): x is Sport =>
   x === "Badminton" || x === "Padel";
 
@@ -194,25 +195,56 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900">
       {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-neutral-200">
+      <header className="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-neutral-200">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+          {/* Logo */}
           <Link
             href="/"
-            className="font-semibold text-lg text-white rounded-full shadow-xl px-4 py-2 bg-[#920E1C] hover:opacity-90"
+            className="font-semibold text-lg rounded-full shadow-md px-4 py-2 bg-[#920E1C] text-white hover:opacity-90"
           >
             BadmintonGo
           </Link>
 
+          {/* Desktop Nav */}
           <nav className="hidden md:flex gap-6 text-sm">
-            <Link href="#gallery" className="hover:opacity-70">Galeri</Link>
-            <Link href="#about" className="hover:opacity-70">Tentang</Link>
-            <Link href="#booking" className="hover:opacity-70">Pilih Lapangan</Link>
+            <a href="#gallery" className="hover:opacity-70">Galeri</a>
+            <a href="#about" className="hover:opacity-70">Tentang</a>
+            <a href="#booking" className="hover:opacity-70">Pilih Lapangan</a>
             <Link href="/bookings" className="hover:opacity-70">Jadwal Saya</Link>
           </nav>
-          <button onClick={() => setCartOpen(true)} className="relative rounded-full px-4 py-2 hover:bg-neutral-100 text-sm text-red-600">
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden p-2 rounded-md text-[#920E1C] border border-[#920E1C]"
+          >
+            ☰
+          </button>
+
+          {/* Keranjang */}
+          <button
+            onClick={() => setCartOpen(true)} 
+            className="hidden md:inline rounded-full px-4 py-2 hover:bg-neutral-100 text-sm text-red-600"
+          >
             Keranjang ({mounted ? count() : 0})
           </button>
         </div>
+
+        {/* Mobile Dropdown */}
+        {menuOpen && (
+          <div className="md:hidden border-t border-neutral-200 bg-white px-4 py-3 space-y-3 text-sm">
+            <a href="#gallery" className="block hover:text-[#920E1C]">Galeri</a>
+            <a href="#about" className="block hover:text-[#920E1C]">Tentang</a>
+            <a href="#booking" className="block hover:text-[#920E1C]">Pilih Lapangan</a>
+            <Link href="/bookings" className="block hover:text-[#920E1C]">Jadwal Saya</Link>
+            
+            <button 
+            onClick={() => setCartOpen(true)} 
+            className="w-full mt-2 rounded-md border border-[#920E1C] text-[#920E1C] py-2 hover:bg-[#920E1C] hover:text-white">
+            Keranjang ({mounted ? count() : 0})
+            </button>
+          </div>
+        )}
       </header>
 
       {/* Hero / Gallery */}
